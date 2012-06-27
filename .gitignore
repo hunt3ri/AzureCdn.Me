@@ -11,3 +11,4 @@ packages/*
 *.user
 *.Publish.xml
 src/*/csx/*
+nuget.config

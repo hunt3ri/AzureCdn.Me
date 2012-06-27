@@ -10,13 +10,13 @@ namespace AzureCdn.Me.Code.Extensions
 	public static class AzureCDNMeExtensions
 	{
 		// Expose as public property to ease unit testing without going to trouble of DI
-		public static string CdnAddress { get; set; }
+		public static string CdnEndpoint { get; set; }
 
 		public static int RandomNum { get; set; }
 
 		static AzureCDNMeExtensions()
 		{
-			CdnAddress = ConfigurationManager.AppSettings["AzureCDNEndpoint"];
+			CdnEndpoint = ConfigurationManager.AppSettings["AzureCDNEndpoint"];
 		}
 
 
@@ -63,16 +63,15 @@ namespace AzureCdn.Me.Code.Extensions
 			var locationArrayList = new ArrayList(locationArray);
 
 			// Create CDN Address as array so we can insert it into url array at appropriate point
-			var cdnAddressArray = new List<string> { CdnAddress };
+			var cdnAddressArray = new List<string> { CdnEndpoint };
 
 			// Replace root element with http address for CDN
-			if (CdnAddress.StartsWith("http") && (locationArrayList[0].ToString() == "~"))
+			if (CdnEndpoint.StartsWith("http") && ((locationArrayList[0].ToString() == "~") || (locationArrayList[0].ToString() == ".")))
 			{
-				locationArrayList[0] = CdnAddress;
+				locationArrayList[0] = CdnEndpoint;
 			}
-			else if (locationArrayList[0].ToString() == "~")
+			else if (locationArrayList[0].ToString() == "~" || locationArrayList[0].ToString() == ".")
 			{
-
 				locationArrayList.InsertRange(1, cdnAddressArray);
 			}
 			else
@@ -101,7 +100,7 @@ namespace AzureCdn.Me.Code.Extensions
 #if DEBUG
 			return true;
 #else
-            return false;
+			return false;
 #endif
 		}
 	}
