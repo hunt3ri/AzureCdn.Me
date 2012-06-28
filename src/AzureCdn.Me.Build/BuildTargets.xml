@@ -205,6 +205,13 @@
 				<include name="**/*.nupkg" />
 			</fileset>
 		</copy>
+
+		<!-- Clear up the package after build-->
+		<delete>
+			<fileset>
+				<include name="*.nupkg" />
+			</fileset>
+		</delete>
 		
 	</target>
 
