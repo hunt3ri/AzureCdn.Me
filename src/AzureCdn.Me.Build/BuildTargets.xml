@@ -186,4 +186,16 @@
 		</exec>
 	</target>
 
+	<target name="CreateNugetPackage">
+		<exec program="${nuget.exe}" commandline="pack ${buildspace.src.dir}/AzureCdn.Me.Build/Nuget/AzureCdn.Me.nuspec">
+		</exec>
+
+		<copy todir="${local.releasespace}/${solution.name}" verbose="true" includeemptydirs="false">
+			<fileset basedir=".">
+				<include name="**/*.nupkg" />
+			</fileset>
+		</copy>
+		
+	</target>
+
 </project>

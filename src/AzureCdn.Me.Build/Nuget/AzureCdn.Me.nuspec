@@ -1,0 +1,24 @@
+﻿<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	<metadata>
+		<id>AzureCdn.Me</id>
+		<version>1.0.0.0</version>
+		<title>AzureCdn.Me</title>
+		<authors>Iain Hunter</authors>
+		<owners>Huzutech.com</owners>
+		<projectUrl>https://github.com/hunt3ri/AzureCdn.Me</projectUrl>
+		<licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
+		<iconUrl>http://www.gravatar.com/avatar/c24270713c524575b0308e05c7e9ff61?s=128</iconUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<summary>AzureCdn.Me provides extensions to simplify working with the Azure CDN</summary>
+		<description>AzureCdn.Me provides a couple of extension methods to allow you to invalidate the cache on static content you are storing on the Azure CDN</description>
+		<releaseNotes>Initial version</releaseNotes>
+		<copyright>Copyright 2012</copyright>
+		<tags>azure cdn cacheing</tags>
+	</metadata>
+	<files>
+		<file src="..\..\AzureCdn.Me.Code\obj\Release\*.dll*" target="lib\net40" />
+		<file src="ReadMe.txt" target="content\CDN" />
+		<file src="Web.config.transform" target="content" />
+	</files>
+</package>

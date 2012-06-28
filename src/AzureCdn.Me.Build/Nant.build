@@ -21,8 +21,8 @@
 	<property name="release.configuration" value="Release" />
 
 	<!-- Manually set version, if using CCNet this will be overwritten later -->
-	<property name="version.tag" value="1.0.0.1"/>
-	<property name="company.name" value="iainhunter.wordpress.com" />
+	<property name="version.tag" value="1.0.0.0"/>
+	<property name="company.name" value="Huzutech.com" />
 
 	<!-- If your projects reside in a different directory from the .sln file specify here, or leave empty if not -->
 	<property name="solution.src.dir" value="src" />
@@ -74,6 +74,8 @@
 		<if test="${deploy.azure.package and deploy.azure.package}"  >
 			<call target="DeployAzurePackage" />
 		</if>
+
+		<call target="CreateNugetPackage" />
 	</target>
 
 	<!--Load BuildTargets-->
