@@ -14,9 +14,12 @@ namespace AzureCdn.Me.Code.Extensions
 
 		public static int RandomNum { get; set; }
 
+		public static string DebugMode { get; set; }
+
 		static AzureCDNMeExtensions()
 		{
 			CdnEndpoint = ConfigurationManager.AppSettings["AzureCDNEndpoint"];
+			DebugMode = ConfigurationManager.AppSettings["AzureCDNDebug"];
 		}
 
 
@@ -95,13 +98,13 @@ namespace AzureCdn.Me.Code.Extensions
 			return new MvcHtmlString(Assembly.GetExecutingAssembly().GetName().Version.ToString());
 		}
 
+		/// <summary>
+		/// Determines whether we're in debug mode, so we can load the appropriate stylesheets etc
+		/// </summary>
 		public static bool IsInDebugMode(this HtmlHelper helper)
 		{
-#if DEBUG
-			return true;
-#else
-			return false;
-#endif
+			return Convert.ToBoolean(DebugMode);
+
 		}
 	}
 }

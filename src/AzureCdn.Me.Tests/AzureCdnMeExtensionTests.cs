@@ -1,4 +1,6 @@
-﻿using AzureCdn.Me.Code.Extensions;
+﻿using System.Web.Mvc;
+using AzureCdn.Me.Code.Extensions;
+using Moq;
 using NUnit.Framework;
 
 namespace AzureCdn.Me.Tests
@@ -82,6 +84,25 @@ namespace AzureCdn.Me.Tests
 
 			//Assert
 			Assert.That(cdnUrl, Is.EqualTo("./CDN/Content/bootstrap.css?version=1.0.0.0"));
+		}
+
+		[Test]
+		public void Test_IsInDebugMode_Handles_String_Conversion()
+		{
+
+			// Arrange
+			AzureCDNMeExtensions.DebugMode = "true";
+
+			// Setup mock html helper
+			var mockViewContext = new Mock<ViewContext>();
+			var mockViewDataContainer = new Mock<IViewDataContainer>();
+			var mockHtmlHelper = new HtmlHelper(mockViewContext.Object, mockViewDataContainer.Object);
+
+			// Act
+			var result = AzureCDNMeExtensions.IsInDebugMode(mockHtmlHelper);
+
+			// Assert
+			Assert.That(result, Is.EqualTo(true));
 		}
 	}
 }
