@@ -12,7 +12,7 @@
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<summary>AzureCdn.Me provides extensions to simplify working with the Azure CDN</summary>
 		<description>AzureCdn.Me provides a couple of extension methods to allow you to invalidate the cache on static content you are storing on the Azure CDN</description>
-		<releaseNotes>Fix debug mode detection</releaseNotes>
+		<releaseNotes>Caller now needs to supply version</releaseNotes>
 		<copyright>Copyright 2012</copyright>
 		<tags>azure cdn cacheing</tags>
 	</metadata>

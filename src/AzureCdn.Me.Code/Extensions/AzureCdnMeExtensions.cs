@@ -24,14 +24,15 @@ namespace AzureCdn.Me.Code.Extensions
 
 
 		/// <summary>
-		/// Creates a URL pointing to the appropriate Azure CDN, includes a version number on query string to invalidate cache.
+		/// Creates a URL pointing to the appropriate Azure CDN, allows user to specify querystring value
 		/// </summary>
 		/// <param name="helper">The helper.</param>
 		/// <param name="contentLocation">The resource.</param>
+        /// <param name="queryStringValue">The value you want to append to the querystring</param>
 		/// <returns></returns>
-		public static string AzureCdnContent(this UrlHelper helper, string contentLocation)
+		public static string AzureCdnContent(this UrlHelper helper, string contentLocation, string queryStringValue)
 		{
-			var queryString = "?version=" + Assembly.GetExecutingAssembly().GetName().Version.ToString();
+			var queryString = "?version=" + queryStringValue;
 			var newLocation = FormatContentLocation(contentLocation, queryString);
 
 			return helper.Content(newLocation);
@@ -46,13 +47,13 @@ namespace AzureCdn.Me.Code.Extensions
 		/// <param name="contentLocation"></param>
 		/// <param name="randomQueryString"></param>
 		/// <returns></returns>
-		public static string AzureCdnContent(this UrlHelper helper, string contentLocation, bool randomQueryString)
+		public static string AzureCdnContent(this UrlHelper helper, string contentLocation)
 		{
 			// Only get a new number the first time the app loads.
 			if (RandomNum == 0)
 				RandomNum = new Random().Next();
 
-			var queryString = "?version=" + RandomNum.ToString();
+		    var queryString = "?version=" + RandomNum;
 			var newLocation = FormatContentLocation(contentLocation, queryString);
 
 			return helper.Content(newLocation);
@@ -88,15 +89,6 @@ namespace AzureCdn.Me.Code.Extensions
 			return newUrl;
 		}
 
-
-		/// <summary>
-		/// Renders the version number.
-		/// </summary>
-		/// <returns></returns>
-		public static MvcHtmlString RenderVersionNumber(this HtmlHelper helper)
-		{
-			return new MvcHtmlString(Assembly.GetExecutingAssembly().GetName().Version.ToString());
-		}
 
 		/// <summary>
 		/// Determines whether we're in debug mode, so we can load the appropriate stylesheets etc
