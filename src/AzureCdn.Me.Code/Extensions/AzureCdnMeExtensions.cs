@@ -32,7 +32,7 @@ namespace AzureCdn.Me.Code.Extensions
 		/// <returns></returns>
 		public static string AzureCdnContent(this UrlHelper helper, string contentLocation, string queryStringValue)
 		{
-			var queryString = "?version=" + queryStringValue;
+			var queryString = "?cachebuster=" + queryStringValue;
 			var newLocation = FormatContentLocation(contentLocation, queryString);
 
 			return helper.Content(newLocation);
@@ -53,7 +53,7 @@ namespace AzureCdn.Me.Code.Extensions
 			if (RandomNum == 0)
 				RandomNum = new Random().Next();
 
-		    var queryString = "?version=" + RandomNum;
+            var queryString = "?cachebuster=" + RandomNum;
 			var newLocation = FormatContentLocation(contentLocation, queryString);
 
 			return helper.Content(newLocation);
